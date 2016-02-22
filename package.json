@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "mocha",
-    "doc": "jsdoc ./lib -d ./docs"
+    "doc": "jsdox ./lib --output ./docs"
   },
   "keywords": [
     "web",
