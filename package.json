@@ -1,0 +1,25 @@
+{
+  "name": "eliter",
+  "version": "0.1.0",
+  "description": "Tiny web server",
+  "repository": "https://github.com/nameoverflow/eliter",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "mocha",
+    "doc": "jsdoc ./lib -d ./docs"
+  },
+  "keywords": [
+    "web",
+    "server",
+    "framework"
+  ],
+  "author": "Hcyue",
+  "license": "MIT",
+  "dependencies": {
+    "eli-router": "^0.1.0",
+    "mz": "^2.3.1"
+  },
+  "devDependencies": {
+    "supertest": "^1.2.0"
+  }
+}
