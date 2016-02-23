@@ -1,6 +1,6 @@
 {
   "name": "eliter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tiny web server",
   "repository": "https://github.com/nameoverflow/eliter",
   "main": "./lib/index.js",
@@ -20,6 +20,13 @@
     "mz": "^2.3.1"
   },
   "devDependencies": {
+    "commitizen": "^2.5.0",
+    "cz-conventional-changelog": "^1.1.5",
     "supertest": "^1.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

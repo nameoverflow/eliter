@@ -18,7 +18,7 @@ describe('Eliter#route(uri, handler)', () => {
 
     it('Should add route with url params rightly', done => {
         let app = new Eliter()
-        app.route('/::/::', function* (child, a, b) {
+        app.route('/::/::', function* (a, b) {
             this.send('text', `${a} ${b}`)
         })
 
@@ -50,7 +50,7 @@ describe('Eliter#route(uri, handler)', () => {
 
             this.a = a
             yield* child
-        }).route('/::').get(function* (child, arg) {
+        }).route('/::').get(function* (arg) {
             let b = yield asyncFun(arg)
 
             this.send('text', `${this.a}, ${b}`)
@@ -70,17 +70,4 @@ describe('Eliter#route(uri, handler)', () => {
 
     })
 
-    it('Deal with root path', done => {
-        let app = new Eliter()
-
-        app.route('/').route('/::').get(function* (child, p) {
-            this.send('text', p)
-        })
-
-        console.log(app._router)
-        console.log(app._router.$children.get('').$children)
-
-        request(app._server).get('/test')
-        .expect('test', done)
-    })
 })
