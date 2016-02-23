@@ -22,6 +22,7 @@
   "devDependencies": {
     "commitizen": "^2.5.0",
     "cz-conventional-changelog": "^1.1.5",
+    "mocha": "*",
     "supertest": "^1.2.0"
   },
   "config": {
