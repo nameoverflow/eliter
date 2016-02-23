@@ -39,4 +39,4 @@ app.start(4000)
 
 ### APIs
 
-(Eliter)[https://github.com/nameoverflow/eliter/blob/master/docs/index.md] and (Connection)[https://github.com/nameoverflow/eliter/blob/master/docs/Connection.md] docs
+[Eliter](https://github.com/nameoverflow/eliter/blob/master/docs/index.md) and [Connection](https://github.com/nameoverflow/eliter/blob/master/docs/Connection.md) docs
