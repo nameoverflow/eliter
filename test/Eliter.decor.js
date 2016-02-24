@@ -13,7 +13,7 @@ describe('Eliter.decor(deco)', () => {
                 this.send('text', 'ouch!')
             }
         })
-        app.route('/', function *(conn) {
+        app.route('/').get(function *(conn) {
             this.test()
         })
 

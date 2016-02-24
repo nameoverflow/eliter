@@ -8,7 +8,7 @@ describe('Eliter#route(uri, handler)', () => {
 
     it('Should create a new route', done => {
         let app = new Eliter()
-        app.route('/a', function* () {
+        app.route('/a').get(function* () {
             this.send('text', 'ouch!')
         })
 
@@ -18,7 +18,7 @@ describe('Eliter#route(uri, handler)', () => {
 
     it('Should add route with url params rightly', done => {
         let app = new Eliter()
-        app.route('/::/::', function* (a, b) {
+        app.route('/::/::').get(function* (a, b) {
             this.send('text', `${a} ${b}`)
         })
 
@@ -31,7 +31,7 @@ describe('Eliter#route(uri, handler)', () => {
         let asyncFun = val => 
             new Promise(res => setTimeout(() => res(val), 1))
         let app = new Eliter()
-        app.route('/', function* () {
+        app.route('/').get(function* () {
             let a = yield asyncFun(1),
                 b = yield asyncFun(2),
                 c = yield asyncFun(3)
@@ -45,7 +45,7 @@ describe('Eliter#route(uri, handler)', () => {
         let asyncFun = val => 
             new Promise(res => setTimeout(() => res(val), 1))
         let app = new Eliter()
-        app.route('/abc').get(function* (child) {
+        app.route('/abc', function* (child) {
             let a = yield asyncFun(1)
 
             this.a = a

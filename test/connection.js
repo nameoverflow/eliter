@@ -16,7 +16,7 @@ describe('Connection', () => {
             it('should send ' + t, done => {
                 let app = new Eliter()
 
-                app.route('/' + t, function *(conn) {
+                app.route('/' + t).get(function *() {
                     this.send(t, t)
                 })
 
@@ -31,7 +31,7 @@ describe('Connection', () => {
         it('should set header and status', done => {
             let app = new Eliter()
 
-            app.route('/a', function *(conn) {
+            app.route('/a').get(function *() {
                 this.send({
                     status: 202,
                     headers: {
@@ -52,7 +52,7 @@ describe('Connection', () => {
         it('should redirect', done => {
             let app = new Eliter()
 
-            app.route('/a', function *(conn) {
+            app.route('/a').get(function *() {
                 this.redirect('/')
             })
 
@@ -67,7 +67,7 @@ describe('Connection', () => {
         it('should set cookie', done => {
             let app = new Eliter()
 
-            app.route('/', function *(conn) {
+            app.route('/').get(function *() {
                 this.setCookie({a: 'omg'})
                     .send('text', '')
             })
@@ -82,7 +82,7 @@ describe('Connection', () => {
         it('should get request body', done => {
             let app = new Eliter()
 
-            app.route('/', function *(conn) {
+            app.route('/').post(function *() {
                 let body = yield this.getBody()
 
                 this.send('text', body)
@@ -99,7 +99,7 @@ describe('Connection', () => {
             var fs = require('fs')
             fs.mkdir('tmp', () => {
                 let app = new Eliter()
-                app.route('/', function *(conn) {
+                app.route('/').get(function *() {
                     let session = yield this.session()
                     this.send('json', session)
                 })
