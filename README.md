@@ -77,10 +77,14 @@ const profile = admin.route('/profile').get(function* () {
 ### Pluginable
 
 ```js
+const app = new Eliter()
+
 const checkAuth = (conn) => conn.checkAuth = function* () {
     const { data: { auth }} = yield this.session()
     return !!auth
 }
+
+app.with(checkAuth)
 
 const admin = app.route('/admin', function *(child) {
     if (yield* this.checkAuth()) {
