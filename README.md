@@ -5,13 +5,18 @@
 
 Eliter is a micro web server based on Node.js, supporting `route`, `session` and `static file`, using co-like generator-based APIs.
 
+
+
+
+## Quick Start
+
 ### Install
 
 ```
 npm install eliter --save
 ```
 
-### Quick Start
+### Hello World
 
 ```javascript
 
@@ -24,7 +29,7 @@ app.route('/').get(function* () {
 })
 
 // `::` stands for a URL param
-app.route('/do/::').get(function* (act, child) {
+app.route('/do/::', function* (act, child) {
     this.act = act
     yield* child // the last param is handler of child route
 }).route('/::').get(function* (name) {
@@ -37,6 +42,55 @@ app.start(4000)
 
 ```
 
-### APIs
+## What Is It Like
+
+### Generator-based Async
+
+```js
+const app = new Eliter()
+app.route('/').get(function *() {
+    const data = yield getFromModel()
+    this.send('json', data)
+})
+```
+
+### Nested Router and Middleware
+
+```js
+const app = new Eliter()
+
+const admin = app.route('/admin', function *(child) {
+    const { data: { auth }} = yield this.session()
+    if (auth) {
+        yield* child
+    } else {
+        this.send({ status: 302, headers: { Location: '/login' }})
+    }
+})
+
+const profile = admin.route('/profile').get(function* () {
+    const data = yield getFromModel()
+    this.send('html', `<p>Hello, ${data.username}<p>`)
+})
+```
+
+### Pluginable
+
+```js
+const checkAuth = (conn) => conn.checkAuth = function* () {
+    const { data: { auth }} = yield this.session()
+    return !!auth
+}
+
+const admin = app.route('/admin', function *(child) {
+    if (yield* this.checkAuth()) {
+        yield* child
+    } else {
+        this.send({ status: 302, headers: { Location: '/login' }})
+    }
+})
+```
+
+## Docs - FIXME
 
 [Eliter](https://github.com/nameoverflow/eliter/blob/master/docs/index.md) and [Connection](https://github.com/nameoverflow/eliter/blob/master/docs/Connection.md) docs

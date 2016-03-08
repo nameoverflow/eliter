@@ -5,10 +5,10 @@ let Eliter = require('..'),
     assert = require('assert')
 
 
-describe('Eliter.decor(deco)', () => {
+describe('Eliter.with(deco)', () => {
     it('should add new method to conn object', (done) => {
         let app = new Eliter()
-        app.decor(conn => {
+        app.with(conn => {
             conn.test = function () {
                 this.send('text', 'ouch!')
             }
