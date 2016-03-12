@@ -1,6 +1,6 @@
 {
   "name": "eliter",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Tiny web server",
   "repository": "https://github.com/nameoverflow/eliter",
   "main": "./lib/index.js",
@@ -16,6 +16,7 @@
   "author": "Hcyue",
   "license": "MIT",
   "dependencies": {
+    "co": "^4.6.0",
     "eli-router": "^0.3.0",
     "mz": "^2.3.1"
   },
