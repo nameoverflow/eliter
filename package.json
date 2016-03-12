@@ -1,6 +1,6 @@
 {
   "name": "eliter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Tiny web server",
   "repository": "https://github.com/nameoverflow/eliter",
   "main": "./lib/index.js",
