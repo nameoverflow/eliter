@@ -5,9 +5,6 @@
 
 Eliter is a tiny node.js web server framework, providing generator-based async APIs.
 
-
-
-
 ## Quick Start
 
 ### Install
@@ -58,8 +55,6 @@ app.route('/').get(function *() {
 
 ```javascript
 const app = new Eliter()
-`
-const app = new Eliter()
 
 const admin = app.route('/admin', function *(child) {
     const { data: { auth }} = yield this.session()
@@ -100,3 +95,5 @@ const admin = app.route('/admin', function *(child) {
 ## Docs - FIXME
 
 Clone and check `./docs`
+
+Run `npm run doc` to build documentions (`npm i` and jsdoc3 required)
