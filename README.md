@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/nameoverflow/eliter.svg?branch=master)](https://travis-ci.org/nameoverflow/eliter)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-Eliter is a micro web server based on Node.js, supporting `route`, `session` and `static file`, using co-like generator-based APIs.
+Eliter is a tiny node.js web server framework, providing generator-based async APIs.
 
 
 
@@ -79,7 +79,7 @@ const profile = admin.route('/profile').get(function* () {
 ```js
 const app = new Eliter()
 
-const checkAuth = (conn) => conn.checkAuth = function* () {
+const checkAuth = conn => conn.checkAuth = function* () {
     const { data: { auth }} = yield this.session()
     return !!auth
 }
