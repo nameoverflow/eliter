@@ -42,11 +42,11 @@ app.start(4000)
 
 ```
 
-## What Is It Like
+## What it looks like
 
 ### Generator-based Async
 
-```js
+```javascript
 const app = new Eliter()
 app.route('/').get(function *() {
     const data = yield getFromModel()
@@ -56,7 +56,9 @@ app.route('/').get(function *() {
 
 ### Nested Router and Middleware
 
-```js
+```javascript
+const app = new Eliter()
+`
 const app = new Eliter()
 
 const admin = app.route('/admin', function *(child) {
@@ -76,7 +78,7 @@ const profile = admin.route('/profile').get(function* () {
 
 ### Pluginable
 
-```js
+```javascript
 const app = new Eliter()
 
 const checkAuth = conn => conn.checkAuth = function* () {
@@ -97,4 +99,4 @@ const admin = app.route('/admin', function *(child) {
 
 ## Docs - FIXME
 
-[Eliter](https://github.com/nameoverflow/eliter/blob/master/docs/index.md) and [Connection](https://github.com/nameoverflow/eliter/blob/master/docs/Connection.md) docs
+Clone and check `./docs`
