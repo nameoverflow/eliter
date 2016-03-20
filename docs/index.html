@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.simplex.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="Connection.html">Connection</a></li><li><a href="Eliter.html">Eliter</a></li><li><a href="Session.html">Session</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#parseRoute">parseRoute</a></li><li><a href="global.html#sendFile">sendFile</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+		<div class="col-sm-3 col-md-3">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>Eliter</h1><p><a href="https://travis-ci.org/nameoverflow/eliter"><img src="https://travis-ci.org/nameoverflow/eliter.svg?branch=master" alt="Build Status"></a>
+<a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly"></a></p>
+<p>Eliter is a tiny node.js web server framework, providing generator-based async APIs.</p>
+<h2>Quick Start</h2><h3>Install</h3><pre class="prettyprint source"><code>npm install eliter --save</code></pre><h3>Hello World</h3><pre class="prettyprint source lang-javascript"><code>
+const Eliter = require('eliter')
+
+let app = new Eliter()
+
+app.route('/').get(function* () {
+    this.send('text', 'hello eliter!') // `this` there is an instance of class Connection
+})
+
+// `::` stands for a URL param
+app.route('/do/::', function* (act, child) {
+    this.act = act
+    yield* child // the last param is handler of child route
+}).route('/::').get(function* (name) {
+    this.send('text', `${this.act} ${name}`)
+})
+
+// /do/hello/world => &quot;hello world&quot;
+
+app.start(4000)</code></pre><h2>What Is It Like</h2><h3>Generator-based Async</h3><pre class="prettyprint source lang-js"><code>const app = new Eliter()
+app.route('/').get(function *() {
+    const data = yield getFromModel()
+    this.send('json', data)
+})</code></pre><h3>Nested Router and Middleware</h3><pre class="prettyprint source lang-js"><code>const app = new Eliter()
+
+const admin = app.route('/admin', function *(child) {
+    const { data: { auth }} = yield this.session()
+    if (auth) {
+        yield* child
+    } else {
+        this.send({ status: 302, headers: { Location: '/login' }})
+    }
+})
+
+const profile = admin.route('/profile').get(function* () {
+    const data = yield getFromModel()
+    this.send('html', `&lt;p>Hello, ${data.username}&lt;p>`)
+})</code></pre><h3>Pluginable</h3><pre class="prettyprint source lang-js"><code>const app = new Eliter()
+
+const checkAuth = conn => conn.checkAuth = function* () {
+    const { data: { auth }} = yield this.session()
+    return !!auth
+}
+
+app.with(checkAuth)
+
+const admin = app.route('/admin', function *(child) {
+    if (yield* this.checkAuth()) {
+        yield* child
+    } else {
+        this.send({ status: 302, headers: { Location: '/login' }})
+    }
+})</code></pre><h2>Docs - FIXME</h2><p><a href="https://github.com/nameoverflow/eliter/blob/master/docs/index.md">Eliter</a> and <a href="https://github.com/nameoverflow/eliter/blob/master/docs/Connection.md">Connection</a> docs</p></article>
+    </section>
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+<div class="modal fade" id="searchResults">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Search results</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
+	
+		on 2016-03-20T17:48:35+08:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+<script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : false,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			var id = $( heading ).attr( "id" );
+			return id && id.replace(/\~/g, '-inner-').replace(/\./g, '-static-') || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		SearcherDisplay.init();
+	});
+</script>
+
+</body>
+</html>

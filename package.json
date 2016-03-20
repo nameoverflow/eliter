@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "mocha",
-    "doc": "jsdox ./lib --output ./docs"
+    "doc": "./node_modules/.bin/jsdoc -t ./node_modules/ink-docstrap/template -R README.md -r lib -d docs"
   },
   "keywords": [
     "web",
@@ -23,6 +23,8 @@
   "devDependencies": {
     "commitizen": "^2.5.0",
     "cz-conventional-changelog": "^1.1.5",
+    "ink-docstrap": "^1.1.4",
+    "jsdoc": "^3.4.0",
     "mocha": "*",
     "supertest": "^1.2.0"
   },
