@@ -94,6 +94,4 @@ const admin = app.route('/admin', function *(child) {
 
 ## Docs - FIXME
 
-Clone and check `./docs`
-
-Run `npm run doc` to build documentions (`npm i` and jsdoc3 required)
+Check [gh-pages](http://nameoverflow.github.io/eliter/)
